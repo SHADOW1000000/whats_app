@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:whats_app/Screens/Profile_screen.dart';
+import 'package:whats_app/Screens/login_screen.dart';
+import 'package:whats_app/Screens/otp_screen.dart';
 import 'package:whats_app/Screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
-
 void main() async{
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,9 +19,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(),
+      theme: ThemeData(
+        colorScheme: const ColorScheme.dark(),
+      ),
+      home: const WelcomeScreen(),
+      routes: {
+        "WelcomeScreen": (context)=> const WelcomeScreen(),
+        "LoginScreen": (context)=> const LoginScreen(),
+        "OtpScreen":(context)=>  const OtpScreen(),
+        "ProfileScreen":(context)=> const ProfileScreen()
+      },
     );
   }
 }
